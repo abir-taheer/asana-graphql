@@ -6,5 +6,7 @@ type Workspace {
     
     users(limit: Int, offset: String): [User!]!
     portfolios: [Portfolio!]
+    
+    tags: [Tag!]
 }
 `;

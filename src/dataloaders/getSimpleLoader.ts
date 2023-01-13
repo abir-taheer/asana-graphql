@@ -4,12 +4,15 @@ import { format } from "util";
 
 export const getSimpleLoader = <KeyType, OutputType>(
   accessToken: string,
-  path: string
+  path: string,
+  batchData?: BatchAction["data"],
+  batchOptions?: BatchAction["options"],
+  dataloaderOptions?: DataLoader.Options<KeyType, OutputType>
 ) => {
   const handler: BatchLoadFn<KeyType, OutputType> = async (ids) => {
     const actions: BatchAction[] = ids.map((id) => ({
-      data: {},
-      options: {},
+      data: { ...batchData },
+      options: { ...batchOptions },
       relative_path: format(path, id),
       method: "GET",
     }));
@@ -21,5 +24,6 @@ export const getSimpleLoader = <KeyType, OutputType>(
 
   return new DataLoader<KeyType, OutputType>(handler, {
     maxBatchSize: 10,
+    ...dataloaderOptions,
   });
 };

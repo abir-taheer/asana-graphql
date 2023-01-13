@@ -2,7 +2,9 @@ import asana from "asana";
 
 export type User = asana.resources.Users.Type;
 export type Workspace = asana.resources.Workspaces.Type;
-
+export type Task = asana.resources.Tasks.Type;
+export type Tag = asana.resources.Tags.Type;
+export type Project = asana.resources.Projects.Type;
 export type ResourceProps<Object> = Pick<any, "gid" | "name" | "resource_type">;
 
 export type PortfolioMembership = {

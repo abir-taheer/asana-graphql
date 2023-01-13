@@ -8,9 +8,11 @@ export const Query = `#graphql
       user(id: ID!): User
       
       # Workspace queries
-      workspace(id: ID): Workspace
+      workspace(id: ID!): Workspace
       
-      workspaces(limit: Int, offset: String): [Workspace!]!
+      tag(id: ID!): Tag!
+      
+      task(id: ID!): Task!
       
   }
 `;

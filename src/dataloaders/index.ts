@@ -1,23 +1,67 @@
-import { getUserIdLoader } from "dataloaders/getUserIdLoader";
-import { getWorkspaceIdLoader } from "dataloaders/getWorkspaceIdLoader";
-import DataLoader from "dataloader";
-import { Portfolio, User, Workspace, WorkspaceMembership } from "types";
-import { getPortfolioIdLoader } from "dataloaders/getPortfolioIdLoader";
-import { getUserIdWorkspaceMembershipsLoader } from "dataloaders/getUserIdWorkspaceMembershipsLoader";
+import {
+  Portfolio,
+  Project,
+  Tag,
+  Task,
+  User,
+  Workspace,
+  WorkspaceMembership,
+} from "types";
+import { getSimpleLoader } from "dataloaders/getSimpleLoader";
 
-export type AllLoaders = {
-  userIdLoader: DataLoader<string, User>;
-  workspaceIdLoader: DataLoader<string, Workspace>;
-  portfolioIdLoader: DataLoader<string, Portfolio>;
-  userIdWorkspaceMembershipsLoader: DataLoader<string, WorkspaceMembership[]>;
-};
+export const getLoaders = (token: string) => {
+  // Gets user by id
+  const userIdLoader = getSimpleLoader<string, User>(token, "users/%s");
 
-export const getLoaders = (accessToken: string): AllLoaders => {
+  // Gets workspace by id
+  const workspaceIdLoader = getSimpleLoader<string, Workspace>(
+    token,
+    "workspaces/%s"
+  );
+
+  // Gets portfolio by id
+  const portfolioIdLoader = getSimpleLoader<string, Portfolio>(
+    token,
+    "portfolios/%s"
+  );
+
+  // Gets a project by id
+  const projectIdLoader = getSimpleLoader<string, Project>(
+    token,
+    "projects/%s"
+  );
+
+  // Gets tag by id
+  const tagIdLoader = getSimpleLoader<string, Tag>(token, "tags/%s");
+
+  // Gets task by id
+  const taskIdLoader = getSimpleLoader<string, Task>(token, "tasks/%s");
+
+  // Loads the tags for a workspace by workspace ID
+  const workspaceIdTagsLoader = getSimpleLoader<string, Tag[]>(
+    token,
+    "workspaces/%s/tags",
+    {
+      limit: 50,
+    }
+  );
+
+  // Loads the workspace memberships for a user by user ID
+  const userIdWorkspaceMembershipsLoader = getSimpleLoader<
+    string,
+    WorkspaceMembership[]
+  >(token, "users/%s/workspace_memberships");
+
   return {
-    userIdLoader: getUserIdLoader(accessToken),
-    workspaceIdLoader: getWorkspaceIdLoader(accessToken),
-    portfolioIdLoader: getPortfolioIdLoader(accessToken),
-    userIdWorkspaceMembershipsLoader:
-      getUserIdWorkspaceMembershipsLoader(accessToken),
+    userIdLoader,
+    workspaceIdLoader,
+    portfolioIdLoader,
+    projectIdLoader,
+    tagIdLoader,
+    taskIdLoader,
+    workspaceIdTagsLoader,
+    userIdWorkspaceMembershipsLoader,
   };
 };
+
+export type AllLoaders = ReturnType<typeof getLoaders>;
