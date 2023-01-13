@@ -5,9 +5,5 @@ export const tags: Resolver<Workspace> = async (
   args,
   { workspaceIdTagsLoader }
 ) => {
-  try {
-    return await workspaceIdTagsLoader.load(workspace.gid);
-  } catch (error) {
-    console.log(error);
-  }
+  return await workspaceIdTagsLoader.load(workspace.gid);
 };

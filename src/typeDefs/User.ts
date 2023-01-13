@@ -15,7 +15,7 @@ export const User = `
       name: String
       photo: UserPhoto
       workspaces: [Workspace]
-      
+      tasks: [Task]
       portfolios: [Portfolio!]
   }
 `;

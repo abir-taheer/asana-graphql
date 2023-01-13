@@ -7,7 +7,6 @@ export const workspaces: Resolver<User> = async (
 ) => {
   const memberships = await userIdWorkspaceMembershipsLoader.load(parent.gid);
 
-  console.log(memberships);
   return workspaceIdLoader.loadMany(
     memberships.map((membership) => membership.workspace.gid)
   );

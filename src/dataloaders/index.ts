@@ -37,10 +37,37 @@ export const getLoaders = (token: string) => {
   // Gets task by id
   const taskIdLoader = getSimpleLoader<string, Task>(token, "tasks/%s");
 
+  // Get tasks that belong to a certain tag based on tag ids
+  const tagIdTasksLoader = getSimpleLoader<string, Task[]>(
+    token,
+    "/tasks",
+    ({ id }) => ({
+      tag: id,
+      limit: 10,
+    })
+  );
+
+  const projectIdTasksLoader = getSimpleLoader<string, Task[]>(
+    token,
+    "/tasks",
+    ({ id }) => ({
+      project: id,
+      limit: 10,
+    })
+  );
+
   // Loads the tags for a workspace by workspace ID
   const workspaceIdTagsLoader = getSimpleLoader<string, Tag[]>(
     token,
     "workspaces/%s/tags",
+    {
+      limit: 50,
+    }
+  );
+
+  const portfolioIdItemsLoader = getSimpleLoader<string, Project[]>(
+    token,
+    "portfolios/%s/items",
     {
       limit: 50,
     }
@@ -59,8 +86,12 @@ export const getLoaders = (token: string) => {
     projectIdLoader,
     tagIdLoader,
     taskIdLoader,
+    tagIdTasksLoader,
     workspaceIdTagsLoader,
     userIdWorkspaceMembershipsLoader,
+    projectIdTasksLoader,
+    portfolioIdItemsLoader,
+    getSimpleLoader,
   };
 };
 

@@ -22,5 +22,6 @@ type Portfolio  {
     start_on: DateTime
     workspace: Workspace
     public: Boolean
+    items: [Project]
 }
 `;

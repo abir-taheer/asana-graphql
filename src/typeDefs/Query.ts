@@ -1,7 +1,7 @@
 export const Query = `#graphql
 
   type Query {
-      greeting: String!
+      greeting(name: String): String!
       
       # User queries
       me: User!
@@ -10,9 +10,12 @@ export const Query = `#graphql
       # Workspace queries
       workspace(id: ID!): Workspace
       
-      tag(id: ID!): Tag!
+      tag(id: ID!): Tag
       
-      task(id: ID!): Task!
+      task(id: ID!): Task
       
+      portfolio(id: ID!): Portfolio
+      
+      project(id: ID!): Project
   }
 `;

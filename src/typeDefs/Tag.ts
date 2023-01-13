@@ -10,5 +10,6 @@ type Tag {
     followers: [User]
     workspace: Workspace
     notes: String
+    tasks: [Task]
 }
 `;
