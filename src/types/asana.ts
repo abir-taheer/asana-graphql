@@ -12,6 +12,13 @@ export type PortfolioMembership = {
   user: ResourceProps<User>;
 };
 
+export type WorkspaceMembership = {
+  gid: string;
+  resource_type: "workspace_membership";
+  user: ResourceProps<User>;
+  workspace: ResourceProps<Workspace>;
+};
+
 export type Portfolio = {
   gid: string;
   color: string;

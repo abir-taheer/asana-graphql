@@ -20,6 +20,6 @@ export const getSimpleLoader = <KeyType, OutputType>(
   };
 
   return new DataLoader<KeyType, OutputType>(handler, {
-    maxBatchSize: 50,
+    maxBatchSize: 10,
   });
 };
