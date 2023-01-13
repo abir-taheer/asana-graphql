@@ -12,6 +12,9 @@
   "dependencies": {
     "@apollo/server": "^4.3.0",
     "asana": "^1.0.0",
+    "axios": "^1.2.2",
+    "bluebird": "^3.7.2",
+    "dataloader": "^2.1.0",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.20.1"
   },

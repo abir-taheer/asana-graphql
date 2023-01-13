@@ -1,9 +1,5 @@
-import { Resolver, User } from "types";
+import { Resolver } from "types";
 
-export const me: Resolver<null, null, User> = async (
-  parent,
-  args,
-  { asana }
-) => {
-  return asana.users.me();
+export const me: Resolver = (parent, args, { me }) => {
+  return me;
 };

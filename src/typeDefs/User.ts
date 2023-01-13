@@ -10,10 +10,12 @@ export const User = `
   }
   
   type User {
-      gid: String
+      gid: ID!
       email: EmailAddress
       name: String
       photo: UserPhoto
       workspaces: [Workspace]
+      
+      portfolios: [Portfolio!]
   }
 `;

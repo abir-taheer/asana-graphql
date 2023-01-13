@@ -1,7 +1,10 @@
 export const Workspace = `
 #graphql
 type Workspace {
-    gid: ID
+    gid: ID!
     name: String
+    
+    users(limit: Int, offset: String): [User!]!
+    portfolios: [Portfolio!]
 }
 `;
